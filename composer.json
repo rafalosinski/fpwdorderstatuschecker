@@ -1,0 +1,14 @@
+{
+    "require": {
+        "timber/timber": "1.17.0",
+        "automattic/woocommerce": "^3.0"
+    },
+    "autoload": {
+        "classmap": [
+            "admin",
+            "assets",
+            "includes",
+            "public"
+        ]
+    }
+}

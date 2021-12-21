@@ -1,0 +1,45 @@
+{
+  "name": "fpwdorderstatuschecker",
+  "version": "1.0.0",
+  "description": "Check any 'API enabled' order status from WooCommerce webiste.",
+  "keywords": [
+    "WooCommerce",
+    "API",
+    "order",
+    "status",
+    "checker"
+  ],
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": ""
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@gitlab.com:rafalosinski/fpwdorderstatuschecker.git"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Rafał Osiński",
+      "email": "rafal@wpfoxly.com",
+      "web": "https://wpfoxly.com"
+    },
+    {
+      "name": "Rafał Osiński",
+      "email": "hello@rafalosinski.com",
+      "web": "https://rafalosinski.com"
+    }
+  ],
+  "bugs": {
+    "email": "rafal@wpfoxly.com",
+    "web": "https://wpfoxly.com"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://wpfoxly.com/",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1",
+    "timestamp": "^0.0.1"
+  }
+}
