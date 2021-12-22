@@ -1,13 +1,12 @@
 jQuery(document).ready(function($) {
-    jQuery("form").submit(function(e){
+    jQuery("#fpwdorderstatuscheker-order-form").submit(function(e){
         e.preventDefault();
 
         let $id = jQuery('[name="fpwdorderstatuscheker-order-number"]').val();
         let $email = jQuery('[name="fpwdorderstatuscheker-order-email"]').val();
-        let ajaxscript = { ajax_url : '/wp-admin/admin-ajax.php' };
 
         jQuery.ajax({
-            url: ajaxscript.ajax_url,
+            url: fpwdorderstatuschekerAjaxScript,
             type: 'post',
             data: {
                 action: 'fpwdorderstatuschecker_check_by_ajax',
@@ -15,7 +14,6 @@ jQuery(document).ready(function($) {
                 order_email: $email
             },
             success: function (response) {
-                console.log(response);
                 if ( Object.keys(response).length >= 1 ) {
                     response = JSON.parse(response);
                     jQuery('#fpwdorderstatuscheker-status').html(response.status);

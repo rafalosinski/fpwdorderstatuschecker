@@ -26,7 +26,7 @@ class FpwdOrderStatusChecker {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      AdfoxlyLoader $loader Maintains and registers all hooks for the plugin.
+	 * @var      FpwdOrderStatusCheckerLoader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -67,7 +67,7 @@ class FpwdOrderStatusChecker {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		global $wp;
+        global $wp;
 
 		/**
 		 * Widget Registration Action
@@ -78,22 +78,15 @@ class FpwdOrderStatusChecker {
 		} );
 	}
 
-	static function adfoxly_ajaxurl() {
-
-		echo '<script type="text/javascript">
-           var adfoxlyAjax = {"ajax_url":"\/wp-admin\/admin-ajax.php"};
-         </script>';
-	}
-
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - AdfoxlyLoader. Orchestrates the hooks of the plugin.
-	 * - adfoxly_i18n. Defines internationalization functionality.
-	 * - adfoxly_Admin. Defines all hooks for the admin area.
-	 * - adfoxly_Public. Defines all hooks for the public side of the site.
+	 * - FpwdOrderStatusCheckerLoader. Orchestrates the hooks of the plugin.
+	 * - FpwdOrderStatusCheckerLoader_i18n. Defines internationalization functionality.
+	 * - FpwdOrderStatusCheckerLoader_Admin. Defines all hooks for the admin area.
+	 * - FpwdOrderStatusCheckerLoader_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -116,18 +109,15 @@ class FpwdOrderStatusChecker {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the adfoxly_i18n class in order to set the domain and to register the hook
+	 * Uses the FpwdOrderStatusCheckerLoader_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$pluginI18n = new FpwdOrderStatusCheckerI18n();
-
-		$this->loader->add_action( 'plugins_loaded', $pluginI18n, 'load_plugin_adfoxly' );
-
+		$this->loader->add_action( 'plugins_loaded', $pluginI18n, 'load_plugin_fpwd_order_status_checker_loader' );
 	}
 
 	/**
@@ -151,8 +141,11 @@ class FpwdOrderStatusChecker {
 	private function define_public_hooks() {
 		$plugin_public = new FpwdOrderStatusCheckerPublic( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+//        add_action( 'wp_head',  ) );
+        $this->loader->add_action( 'wp_head', $plugin_public, 'fpwdorderstatuscheker_ajax_script' );
 	}
 
 	/**
@@ -179,7 +172,7 @@ class FpwdOrderStatusChecker {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    AdfoxlyLoader    Orchestrates the hooks of the plugin.
+	 * @return    FpwdOrderStatusCheckerLoader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

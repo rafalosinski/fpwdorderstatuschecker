@@ -20,8 +20,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  * create widget
  */
 class FpwdOrderStatusCheckerWidget extends WP_Widget {
+
+    /**
+     * The content is responsible for handling generated view content
+     * of the widget.
+     *
+     * @since    1.0.0
+     * @access   protected
+     * @var      FpwdOrderStatusCheckerWidget $content Maintains all view content which is generated.
+     */
+    protected $content;
+
 	/**
-	 * construct function
+	 * __construct
+     *
+     * Generating first instance of a widget in admin dashboard.
+     *
+     * @since    1.0.0
 	 */
 	function __construct() {
 		parent::__construct(
@@ -32,10 +47,14 @@ class FpwdOrderStatusCheckerWidget extends WP_Widget {
 	}
 
 	/**
-	 * display widget content
+     * The core view plugin method.
+     *
+     * Generate view of the form on public-facing side. User use that form
+     * for requests to the WooCommerce API
+     *
+     * @since    1.0.0
 	 */
 	public function widget( $args, $instance ) {
-
 		echo $args[ 'before_widget' ];
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args[ 'before_title' ] . apply_filters( 'widget_title', $instance[ 'title' ] ) . $args[ 'after_title' ];
@@ -44,32 +63,21 @@ class FpwdOrderStatusCheckerWidget extends WP_Widget {
         $message = ! empty( $instance['message'] ) ? $instance['message'] : esc_html__( 'Your current order status:', 'fpwdorderstatuschecker' );
         $btn = ! empty( $instance['btn'] ) ? $instance['btn'] : esc_html__( 'Check order status', 'fpwdorderstatuschecker' );
 
-        ?>
-        <form method="post">
-            <p>
-                <label for="fpwdorderstatuscheker-order-number" style="display: block;"><?php _e( 'Order ID', 'fpwdorderstatuschecker' ) ?></label>
-                <input type="text" value="" name="fpwdorderstatuscheker-order-number" id="fpwdorderstatuscheker-order-number" required />
-            </p>
-            <p>
-                <label for="fpwdorderstatuscheker-order-email" style="display: block;"><?php _e( 'Order E-mail', 'fpwdorderstatuschecker' ) ?></label>
-                <input type="email" value="" name="fpwdorderstatuscheker-order-email" id="fpwdorderstatuscheker-order-email" required />
-            </p>
-            <p id='fpwdorderstatuscheker-status'>
-                <?php _e( $message, 'fpwdorderstatuschecker' ) ?>
-            </p>
-            <p>
-                <label for="fpwdorderstatuscheker-save">
-                    <input type="submit" name="fpwdorderstatuscheker-save" id="fpwdorderstatuscheker-save" value="<?php echo $btn ?>"/>
-                </label>
-            </p>
-        </form>
-        <?php
+        $this->content['message'] = $message;
+        $this->content['btn'] = $btn;
+        $this->content['html_prefix'] = "fpwdorderstatuscheker";
+
+        echo Timber::compile( basename(__FILE__, '.php') . '.twig', $this->content );
 		echo $args[ 'after_widget' ];
 	}
 
-
 	/**
-	 * widget form
+	 * The core view plugin method.
+     *
+     * Generate data for the form in a dashboard. Customizing all fields on a plugin view, generated
+     * on the website as a widget.
+     *
+     * @since    1.0.0
 	 */
 	public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'Order Status', 'fpwdorderstatuschecker' );
@@ -92,7 +100,9 @@ class FpwdOrderStatusCheckerWidget extends WP_Widget {
 	}
 
 	/**
-	 * widget update
+	 * Data update method for widget
+     *
+     * @since    1.0.0
 	 */
 	public function update( $new_instance, $old_instance ) {
         $instance = array();

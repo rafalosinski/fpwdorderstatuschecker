@@ -25,6 +25,8 @@ class FpwdOrderStatusCheckerAdmin {
 
 		add_action( 'admin_menu', array( $this, 'order_status_checker_add_plugin_page' ) );
 		add_action( 'admin_init', array( $this, 'order_status_checker_page_init' ) );
+
+        $this->load_timber_views();
 	}
 
 	public function order_status_checker_add_plugin_page() {
@@ -133,6 +135,19 @@ class FpwdOrderStatusCheckerAdmin {
         printf(
             '<input class="regular-text" type="text" name="order_status_checker_option_name[woocommerce_url_2]" id="woocommerce_url_2" value="%s">',
             isset( $this->order_status_checker_options['woocommerce_url_2'] ) ? esc_attr( $this->order_status_checker_options['woocommerce_url_2']) : ''
+        );
+    }
+
+    /**
+     * Call the Timber Instance Class.
+     * Twig template engine for WordPress
+     *
+     * @since    1.0.0
+     */
+    public function load_timber_views() {
+        $timber = new \Timber\Timber();
+        Timber::$locations = array(
+            realpath( dirname( __FILE__ ) ) . '/partials/views'
         );
     }
 }

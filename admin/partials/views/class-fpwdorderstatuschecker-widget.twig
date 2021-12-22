@@ -1,0 +1,18 @@
+<form method="post" id="{{ html_prefix }}-order-form">
+    <p>
+        <label for="{{ html_prefix }}-order-number" style="display: block;">Order ID</label>
+        <input type="text" value="" name="{{ html_prefix }}-order-number" id="{{ html_prefix }}-order-number" required />
+    </p>
+    <p>
+        <label for="{{ html_prefix }}-order-email" style="display: block;">Order E-mail</label>
+        <input type="email" value="" name="{{ html_prefix }}-order-email" id="{{ html_prefix }}-order-email" required />
+    </p>
+    <p id='{{ html_prefix }}-status'>
+        {{ message }}
+    </p>
+    <p>
+        <label for="{{ html_prefix }}-save">
+            <input type="submit" name="{{ html_prefix }}-save" id="{{ html_prefix }}-save" value="{{ btn }}"/>
+        </label>
+    </p>
+</form>

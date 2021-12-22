@@ -1,11 +1,11 @@
 #!/bin/sh
 
-if [[ -d "/Users/rafalosinski/Sites/releases/fpwdorderstatuschecker" ]]
+if [[ -d "~/Sites/releases/fpwdorderstatuschecker" ]]
 then
-    rm -r /Users/rafalosinski/Sites/releases/fpwdorderstatuschecker
-    mkdir /Users/rafalosinski/Sites/releases/fpwdorderstatuschecker
+    rm -r ~/Sites/releases/fpwdorderstatuschecker
+    mkdir ~/Sites/releases/fpwdorderstatuschecker
 else
-    mkdir /Users/rafalosinski/Sites/releases/fpwdorderstatuschecker
+    mkdir ~/Sites/releases/fpwdorderstatuschecker
 fi
 
 gulp

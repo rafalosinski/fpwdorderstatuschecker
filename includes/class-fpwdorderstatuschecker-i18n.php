@@ -23,7 +23,7 @@ class FpwdOrderStatusCheckerI18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_adfoxly() {
+	public function load_plugin_fpwd_order_status_checker_loader() {
 		load_plugin_textdomain(
 			'fpwdorderstatuschecker',
 			false,

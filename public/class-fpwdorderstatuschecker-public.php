@@ -68,13 +68,7 @@ class FpwdOrderStatusCheckerPublic {
 	 */
 	public function enqueue_styles() {
 		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in AdfoxlyLoader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The AdfoxlyLoader will then create the relationship
+		 * The FpwdOrderStatusCheckerLoader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -88,27 +82,33 @@ class FpwdOrderStatusCheckerPublic {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in AdfoxlyLoader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The AdfoxlyLoader will then create the relationship
+		 * The FpwdOrderStatusCheckerLoader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script( $this->plugin_name . "+ajax", plugin_dir_url( __FILE__ ) . 'js/fpwdorderstatuschkecker-ajax.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . "-ajax", plugin_dir_url( __FILE__ ) . 'js/fpwdorderstatuschkecker-ajax.js', array( 'jquery' ), $this->version, false );
 	}
 
-	public function enqueue_facebook_pixel() {
-	}
 
-	public function load_timber_views() {
+    /**
+     * Register the ajax admin url.
+     *
+     * @since    1.0.0
+     */
+    public function fpwdorderstatuscheker_ajax_script() {
+        echo '<script type="text/javascript">var fpwdorderstatuschekerAjaxScript = "' . admin_url('admin-ajax.php') . '"</script>';
+    }
+
+    /**
+     * Call the Timber Instance Class.
+     * Twig template engine for WordPress
+     *
+     * @since    1.0.0
+     */
+    public function load_timber_views() {
 		$timber = new \Timber\Timber();
 		Timber::$locations = array(
-			realpath( dirname( __FILE__ ) ) . '/partials/views',
-			realpath( dirname( __DIR__ ) ) . '/includes/view'
+			realpath( dirname( __FILE__ ) ) . '/partials/views'
 		);
 	}
 }

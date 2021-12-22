@@ -26,9 +26,7 @@ The simplest Order Checker ever. :) Really!
 
 = How to install? =
 
-You have two options.
-First: Just download ZIP file from the top, and put it in Plugins section in your WordPress.
-Second: Go to the your WordPress Website Admin Panel. Click on "Plugins" on the right and "Add new" on the top in next step. On the top right search type: "adfoxly". After that click on the button "Install now" and wait few seconds. After all, click "Activate". That's all.
+Just download ZIP file and put it in Plugins section in your WordPress.
 
 == Changelog ==
 

@@ -1,0 +1,16 @@
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+.idea
+.idea/*
+.idea/workspace.xml
+node_modules/
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
